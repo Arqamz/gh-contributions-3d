@@ -1,0 +1,14 @@
+# See https://github.com/numtide/treefmt
+
+[settings]
+on-unmatched = "info"
+walk = "git"
+
+[formatter.prettier]
+command = "prettier"
+options = ["--write"]
+includes = ["*.ts", "*.js", "*.json", "*.md", "*.yaml", "*.yml"]
+
+[formatter.nixfmt]
+command = "nixfmt"
+includes = ["*.nix"]

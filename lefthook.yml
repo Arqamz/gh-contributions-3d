@@ -1,0 +1,6 @@
+pre-commit:
+  commands:
+    treefmt:
+      run: treefmt --fail-on-change {staged_files}
+    lint:
+      run: bun run lint {staged_files}
