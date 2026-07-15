@@ -4,3 +4,7 @@ node_modules/
 .DS_Store
 .vscode/
 .impeccable/
+
+# Generated renders — keep only the committed sample showcase SVGs.
+/assets/*
+!/assets/sample-*.svg

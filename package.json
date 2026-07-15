@@ -1,0 +1,27 @@
+{
+  "name": "gh-contributions-3d",
+  "version": "1.0.0",
+  "description": "Visualize GitHub contributions in 3D",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "sample": "bun run src/generateSample.ts",
+    "lint": "eslint .",
+    "format": "treefmt",
+    "postinstall": "bunx lefthook install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@types/bun": "^1.1.14",
+    "@typescript-eslint/eslint-plugin": "^8.53.1",
+    "@typescript-eslint/parser": "^8.53.1",
+    "eslint": "^9.39.2",
+    "lefthook": "^1.10.10",
+    "prettier": "^3.8.1",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.53.1"
+  }
+}
