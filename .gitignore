@@ -5,6 +5,5 @@ node_modules/
 .vscode/
 .impeccable/
 
-# Generated renders — keep only the committed sample showcase SVGs.
-/assets/*
-!/assets/sample-*.svg
+# Generated renders — the whole assets/ dir is build output, not tracked.
+/assets/
