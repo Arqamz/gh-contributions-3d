@@ -2,6 +2,49 @@ import { DayContribution } from "./types.js";
 
 export type GraphMode = "columns" | "terrain";
 
+/**
+ * Named viewing angles for the terrain. The oblique basis is set by
+ * `rowRise` (how far apart rows are spread vertically on screen) and
+ * `rowShift` (the leftward day-fan). Raising `rowRise` tilts the camera more
+ * top-down: rows spread further apart, so back rows peek above tall front rows
+ * and flat-topped plateaus reveal their surface instead of reading as a wall.
+ * Lowering it goes side-on, where height dominates — dramatic for sparse data.
+ *
+ *   low    side-on; peaks tower, best for sparse / realistic graphs
+ *   medium balanced default (a light 3/4 tilt)
+ *   high   top-down enough that a full-height peak's depth ≈ its height, so
+ *          dense day-patterns (weekdays/weekends) show their shape
+ *   top    near-overhead; shape is maximally legible, height read via shading
+ */
+export type ViewAngle = "low" | "medium" | "high" | "top";
+
+export const VIEW_ANGLES: Record<
+  ViewAngle,
+  { rowRise: number; rowShift: number }
+> = {
+  low: { rowRise: 0.6, rowShift: 0.32 },
+  medium: { rowRise: 1.1, rowShift: 0.38 },
+  high: { rowRise: 1.9, rowShift: 0.46 },
+  top: { rowRise: 2.7, rowShift: 0.58 },
+};
+
+/**
+ * Resolve a viewing-angle spec into projection overrides.
+ * - undefined / empty -> {} (use the config default)
+ * - a preset name ("low"|"medium"|"high"|"top") -> that preset
+ * - a bare number -> that literal `rowRise` (rowShift left at default)
+ * Returns {} for anything unrecognized so callers can fall back cleanly.
+ */
+export function resolveViewAngle(
+  spec: string | undefined,
+): Partial<{ rowRise: number; rowShift: number }> {
+  if (spec === undefined || spec === "") return {};
+  if (spec in VIEW_ANGLES) return { ...VIEW_ANGLES[spec as ViewAngle] };
+  const n = Number(spec);
+  if (!Number.isNaN(n) && n > 0) return { rowRise: n };
+  return {};
+}
+
 interface Point2D {
   x: number;
   y: number;
@@ -36,19 +79,34 @@ export const GraphConfig = {
   //   week -> ( step, 0 )                horizontal, weeks stay level
   //   day  -> ( -step*rowShift, step*rowRise )   down-left fan
   //   z    -> ( 0, -1 )                  extrude up
-  // rowRise controls how "from the side" the view is (bigger => rows are
-  // pushed further apart vertically => heights read more strongly).
-  // rowShift controls the leftward fan that keeps rows from overlapping.
-  rowRise: 0.9,
-  rowShift: 0.34,
+  // rowRise sets the viewing angle: bigger tilts the camera more top-down so
+  // rows spread further apart vertically — back rows clear tall front rows and
+  // plateau tops open up (vs. a small value where dense day-patterns read as a
+  // flat wall). rowShift is the leftward fan that keeps rows from overlapping.
+  // These default to the `medium` VIEW_ANGLES preset; pass a viewing angle on
+  // the CLI (low|medium|high|top, or a raw rowRise) to override per graph.
+  // `high`/`top` are the ones that make weekdays/weekends legible.
+  ...VIEW_ANGLES.medium,
 
-  // Terrain smoothing / normalization
-  subdiv: 2, // cells per axis to subdivide each day/week into (finer mesh -> room for slopes)
-  // 0.0 = sharp, jagged peaks (like the reference); 1.0 = heavily rounded hills.
-  // Drives fractional blur passes on the subdivided lattice. Peak *height* is
-  // preserved across the range (heights are re-normalized after smoothing), so
-  // this trades peak sharpness for slope gentleness without shrinking the terrain.
-  smoothness: 0.2,
+  // Terrain smoothing / normalization.
+  //
+  // `smoothness` (0..1) is the single "sharpness <-> smoothness of the triangles"
+  // knob. It drives BOTH facet size and slope blur along one perceptual axis:
+  //   0.0  few large flat triangles, no blur -> a crisp low-poly facet look
+  //        (each isometric triangle reads as a discrete plane, like the ref art)
+  //   1.0  many small triangles + full blur -> smooth rolling hills, facets melt
+  //        into a continuous surface
+  // Facet size comes from the subdivision level (cells per axis each day/week is
+  // split into): `subdivRange` maps smoothness low->high onto min->max subdivs.
+  // Fewer subdivs = bigger, sharper triangles; more = finer, smoother. The blur
+  // passes then gentle the slopes on that lattice. Peak *height* is preserved
+  // across the whole range (heights are re-normalized after blurring), so this
+  // trades facet sharpness for smoothness without shrinking the terrain.
+  smoothness: 1.0,
+  // Subdivisions per cell at smoothness 0 .. 1. Capped at 3: subdiv 4 looks only
+  // marginally smoother than 3 but nearly doubles the triangle count (and file
+  // size), so 3 is the quality/size sweet spot for the smooth (s=1) default.
+  subdivRange: [1, 3] as [number, number],
   maxSmoothPasses: 6, // blur passes at smoothness = 1.0
 
   // Height normalization. "auto" fits the tallest ~p97 day to a full-height peak
@@ -67,9 +125,18 @@ export const GraphConfig = {
   diffuse: 0.34,
   light: { x: -0.4, y: -0.55, z: 0.75 } as Vec3, // from upper-front
 
-  // Terrain solidity: perimeter skirt drops to -baseThickness to close the mesh.
-  baseThickness: 8, // px of base "lip" below the flat floor
-  skirtBrightness: 0.62, // flat shade for the vertical cliff walls
+  // Terrain solidity. The reference art is a *pure heightfield surface*: peaks
+  // rise off a thin flat ground plane, and the empty (z=0) cells are that
+  // ground — there is no solid underside. That is `solidBase: false` (the
+  // default): no skirt, no base slab, just the top mesh, which for a z>=0
+  // heightfield viewed front-top is already fully opaque and closed.
+  //
+  // `solidBase: true` instead closes the mesh into an extruded solid mass by
+  // dropping a vertical "curtain" from every viewer-facing edge down to
+  // -baseThickness (a chunky bar with cliff walls). Kept for the blockier look.
+  solidBase: false,
+  baseThickness: 8, // px of base "lip" below the floor (solidBase only)
+  skirtBrightness: 0.62, // flat shade for the vertical cliff walls (solidBase only)
 
   // Layout
   padding: 30,
@@ -328,7 +395,12 @@ export class GraphSvgGenerator {
     // The upsample + blur turns the blocky per-cell steps into gradual slopes
     // that lead up to the peaks — instead of vertical cliffs and flat plateaus —
     // while keeping peak positions and rough height intact.
-    const S = Math.max(1, Math.floor(this.cfg.subdiv));
+    // Facet size: fewer subdivisions -> bigger, sharper low-poly triangles;
+    // more -> finer, smoother. Driven off `smoothness` so the same knob that
+    // blurs the slopes also picks the triangle resolution.
+    const sm = Math.max(0, Math.min(1, this.cfg.smoothness));
+    const [minS, maxS] = this.cfg.subdivRange;
+    const S = Math.max(1, Math.round(minS + sm * (maxS - minS)));
     const fd = days * S;
     const fw = weeks * S;
     const bilerp = (fi: number, fj: number): number => {
@@ -420,13 +492,18 @@ export class GraphSvgGenerator {
       }
     }
 
-    // Solid fill. The top surface alone is a hollow shell — where the terrain
-    // steps down toward the viewer you would see under it to the floor. To make
-    // it a solid mass we drop a vertical "curtain" from every cell's viewer-
-    // facing edge down to the base plane. Painted back-to-front, nearer curtains
-    // overpaint farther ones, so the union fills the whole front silhouette.
-    // Back-facing curtains are culled, so only the exposed faces are drawn.
-    const baseZ = -this.cfg.baseThickness;
+    // Close the mesh with vertical "curtains" dropped from top edges to a base
+    // plane. Two modes:
+    //   solidBase: drop from EVERY viewer-facing cell edge to -baseThickness, so
+    //     the union fills the whole silhouette and reads as a solid extruded bar.
+    //   otherwise (default): the heightfield is a shell on a flat ground plane.
+    //     Interior steps are already carried by the continuous top surface, so we
+    //     only close the OUTER perimeter down to the ground (z=0) — otherwise an
+    //     elevated edge row/column (e.g. a busy Saturday at the front) would
+    //     float above nothing. This matches the reference: terrain meeting the
+    //     ground at its border, no solid underside.
+    const solid = this.cfg.solidBase;
+    const baseZ = solid ? -this.cfg.baseThickness : 0;
     const wall = (top1: Vec3, top2: Vec3, fi: number, fj: number) => {
       const avgTop = (top1.z + top2.z) / 2;
       faces.push({
@@ -442,14 +519,26 @@ export class GraphSvgGenerator {
         skirt: true,
       });
     };
-    for (let fi = 0; fi < fd; fi++) {
-      for (let fj = 0; fj < fw; fj++) {
-        // Day-facing curtain: the front (+day) edge of every cell.
-        wall(zAt(fi + 1, fj), zAt(fi + 1, fj + 1), fi + 1, fj);
+    if (solid) {
+      for (let fi = 0; fi < fd; fi++) {
+        for (let fj = 0; fj < fw; fj++) {
+          // Day-facing curtain: the front (+day) edge of every cell.
+          wall(zAt(fi + 1, fj), zAt(fi + 1, fj + 1), fi + 1, fj);
+        }
+        // Week-facing curtains: the left and right silhouette of each row.
+        wall(zAt(fi, 0), zAt(fi + 1, 0), fi, 0);
+        wall(zAt(fi, fw), zAt(fi + 1, fw), fi, fw);
       }
-      // Week-facing curtains: the left and right silhouette of each row.
-      wall(zAt(fi, 0), zAt(fi + 1, 0), fi, 0);
-      wall(zAt(fi, fw), zAt(fi + 1, fw), fi, fw);
+    } else {
+      // Front perimeter only (nearest edge); zero-height where the edge is flat.
+      for (let fj = 0; fj < fw; fj++) {
+        wall(zAt(fd, fj), zAt(fd, fj + 1), fd, fj);
+      }
+      // Left/right perimeter silhouettes.
+      for (let fi = 0; fi < fd; fi++) {
+        wall(zAt(fi, 0), zAt(fi + 1, 0), fi, 0);
+        wall(zAt(fi, fw), zAt(fi + 1, fw), fi, fw);
+      }
     }
     // Back edge (day 0) closes the far side; culled unless it faces the viewer.
     for (let fj = 0; fj < fw; fj++) {
@@ -470,15 +559,10 @@ export class GraphSvgGenerator {
         out.push(this.polygon(pts, fill, 0.6, fill));
       } else {
         // Top surface keeps the thin grey facet lines for the low-poly read.
-        out.push(
-          this.polygon(
-            pts,
-            fill,
-            this.cfg.meshStroke,
-            this.cfg.colors.mesh,
-            this.cfg.meshOpacity,
-          ),
-        );
+        // The stroke is identical on every facet, so it lives in the `.mesh`
+        // CSS class (see wrapInSvg) instead of being repeated inline — a big
+        // file-size saving on dense meshes.
+        out.push(this.facet(pts, fill));
       }
     }
     return out;
@@ -558,7 +642,7 @@ export class GraphSvgGenerator {
     const r = Math.round(ca[0] + (cb[0] - ca[0]) * t);
     const g = Math.round(ca[1] + (cb[1] - ca[1]) * t);
     const bl = Math.round(ca[2] + (cb[2] - ca[2]) * t);
-    return `rgb(${r}, ${g}, ${bl})`;
+    return this.rgbToHex(r, g, bl);
   }
 
   private hexToRgb(hex: string): [number, number, number] {
@@ -574,7 +658,18 @@ export class GraphSvgGenerator {
       ? this.hexToRgb(color)
       : this.parseRgb(color);
     const light = Math.min(1, brightness);
-    return `rgb(${Math.round(r * light)}, ${Math.round(g * light)}, ${Math.round(b * light)})`;
+    return this.rgbToHex(
+      Math.round(r * light),
+      Math.round(g * light),
+      Math.round(b * light),
+    );
+  }
+
+  /** Compact `#rrggbb` (shorter than `rgb(r, g, b)` in the emitted SVG). */
+  private rgbToHex(r: number, g: number, b: number): string {
+    const h = (n: number) =>
+      Math.max(0, Math.min(255, n)).toString(16).padStart(2, "0");
+    return `#${h(r)}${h(g)}${h(b)}`;
   }
 
   private parseRgb(rgb: string): [number, number, number] {
@@ -591,11 +686,25 @@ export class GraphSvgGenerator {
     stroke = fill,
     strokeOpacity = 1,
   ): string {
+    // Integer coordinates: the terrain spans hundreds of px so sub-pixel
+    // precision is invisible, and shared vertices round identically (no seams).
+    // This trims a large fraction of the file size on dense (high-subdiv) meshes.
     const points = pts
-      .map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`)
+      .map((p) => `${Math.round(p.x)},${Math.round(p.y)}`)
       .join(" ");
     const so = strokeOpacity < 1 ? ` stroke-opacity="${strokeOpacity}"` : "";
     return `<polygon points="${points}" fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}"${so}/>`;
+  }
+
+  /**
+   * A top-surface facet: only its fill varies, so the shared grey facet stroke
+   * is carried by the `.mesh` CSS class rather than repeated on every polygon.
+   */
+  private facet(pts: Point2D[], fill: string): string {
+    const points = pts
+      .map((p) => `${Math.round(p.x)},${Math.round(p.y)}`)
+      .join(" ");
+    return `<polygon points="${points}" fill="${fill}" class="mesh"/>`;
   }
 
   private calculateBounds(grid: number[][]): Bounds {
@@ -611,7 +720,7 @@ export class GraphSvgGenerator {
     const W = weeks * step;
     const D = days * step;
 
-    const baseZ = -this.cfg.baseThickness;
+    const baseZ = this.cfg.solidBase ? -this.cfg.baseThickness : 0;
     const corners = [
       this.project(0, 0, 0),
       this.project(W, 0, 0),
@@ -659,6 +768,7 @@ export class GraphSvgGenerator {
       .subtitle { font: 400 12px 'Segoe UI', Arial, sans-serif; fill: #8b949e; }
       .credit { font: 8px 'Segoe UI', Arial, sans-serif; fill: #6e7781; opacity: 0.8; }
       .graph { filter: drop-shadow(0 1px 3px rgba(0,0,0,0.15)); }
+      .mesh { stroke: ${this.cfg.colors.mesh}; stroke-width: ${this.cfg.meshStroke}; stroke-opacity: ${this.cfg.meshOpacity}; }
     </style>
   </defs>
   <text x="20" y="25" class="title">GitHub Contributions</text>

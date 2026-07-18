@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
-import { GraphSvgGenerator, GraphConfig } from "./graph.js";
+import { GraphSvgGenerator, GraphConfig, resolveViewAngle } from "./graph.js";
+import { parseArgs, pickFlag } from "./cli.js";
 import {
   generateSampleContributions,
   summarizeContributions,
@@ -21,17 +22,30 @@ const PATTERNS: SamplePattern[] = [
 const HEIGHT_REFERENCE = 20;
 
 function main() {
-  const userName = process.argv[2] || "SampleUser";
-  // Optional: `bun run sample <name> <smoothness 0..1>` to sweep sharpness.
-  const smoothnessArg = process.argv[3];
+  // Options: `bun run sample [name] [--angle <preset|number>] [--smoothness <0..1>]`
+  //   --angle/-a/-view : low | medium | high | top, or a raw rowRise number
+  //   --smoothness/-s  : 0 (sharp low-poly) .. 1 (smooth rolling hills)
+  const { positional, flags } = parseArgs(process.argv.slice(2));
+  const userName = positional[0] || "SampleUser";
+  const smoothnessArg = pickFlag(flags, "smoothness", "s");
   const smoothness =
     smoothnessArg !== undefined ? Number(smoothnessArg) : undefined;
+  if (
+    smoothness !== undefined &&
+    (Number.isNaN(smoothness) || smoothness < 0 || smoothness > 1)
+  ) {
+    console.error(
+      `Error: --smoothness must be a number in 0..1 (got "${smoothnessArg}")`,
+    );
+    process.exit(1);
+  }
+  const angle = resolveViewAngle(pickFlag(flags, "angle", "view", "a"));
 
   const outDir = path.resolve(process.cwd(), "assets");
   fs.mkdirSync(outDir, { recursive: true });
 
   console.log("Generating sample terrains...");
-  if (smoothness !== undefined && !Number.isNaN(smoothness)) {
+  if (smoothness !== undefined) {
     console.log(`Smoothness override: ${smoothness}`);
   }
 
@@ -44,6 +58,7 @@ function main() {
     const overrides: Partial<typeof GraphConfig> = {
       mode: "terrain",
       heightReference: HEIGHT_REFERENCE,
+      ...angle,
     };
     if (smoothness !== undefined && !Number.isNaN(smoothness)) {
       overrides.smoothness = smoothness;
