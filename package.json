@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "bun run src/index.ts",
     "sample": "bun run src/generateSample.ts",
+    "sweep": "bun run src/sweep.ts",
     "lint": "eslint .",
     "format": "treefmt",
     "postinstall": "bunx lefthook install"
