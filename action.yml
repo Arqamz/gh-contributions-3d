@@ -1,0 +1,48 @@
+name: "3D GitHub Contributions"
+description: "Render a GitHub user's contribution calendar as a 3D terrain SVG."
+branding:
+  icon: "bar-chart-2"
+  color: "green"
+
+inputs:
+  github_user:
+    description: "GitHub username to render."
+    required: true
+  github_token:
+    description: "Token with read access to the user's contributions. secrets.GITHUB_TOKEN works for public contributions; use a PAT for private ones."
+    required: true
+  output:
+    description: "Path in your repo to write the SVG."
+    required: false
+    default: "profile-3d-contrib/terrain.svg"
+  angle:
+    description: "Viewing angle: low | medium | high | top, or a raw rowRise number."
+    required: false
+    default: "medium"
+  smoothness:
+    description: "Triangle smoothness 0..1 (0 = sharp low-poly, 1 = smooth hills)."
+    required: false
+    default: "1"
+  mode:
+    description: "Render style: terrain | columns."
+    required: false
+    default: "terrain"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
+    # No install step: the renderer has no runtime dependencies.
+    - name: Render 3D contributions SVG
+      shell: bash
+      env:
+        TOKEN_GITHUB: ${{ inputs.github_token }}
+      run: |
+        bun run "${{ github.action_path }}/src/index.ts" \
+          "${{ inputs.github_user }}" \
+          --angle "${{ inputs.angle }}" \
+          --smoothness "${{ inputs.smoothness }}" \
+          --mode "${{ inputs.mode }}" \
+          --out "${{ inputs.output }}"

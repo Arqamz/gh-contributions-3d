@@ -13,11 +13,14 @@ Options:
   -s, --smoothness <0..1>       triangle sharpness: 0 = sharp low-poly,
                                 1 = smooth rolling hills (default: 1)
   -m, --mode <terrain|columns>  render style (default: terrain)
+  -o, --out <path>              write the SVG here instead of
+                                assets/<user>-<mode>.svg
 
 Examples:
   bun run dev octocat
   bun run dev octocat --angle high --smoothness 0.4
-  bun run dev octocat -m columns -a top`;
+  bun run dev octocat -m columns -a top
+  bun run dev octocat --out profile-3d/terrain.svg`;
 
 function toDayContributions(data: GithubApiResponse): DayContribution[] {
   const weeks =
@@ -43,6 +46,7 @@ async function main() {
   const mode = (pickFlag(flags, "mode", "m") ?? "terrain") as GraphMode;
   const angle = pickFlag(flags, "angle", "view", "a"); // preset or raw rowRise
   const smoothnessArg = pickFlag(flags, "smoothness", "s"); // 0..1, optional
+  const outArg = pickFlag(flags, "out", "o"); // explicit output path, optional
   const token = process.env.TOKEN_GITHUB;
 
   if (!userName) {
@@ -83,9 +87,10 @@ async function main() {
       ...(Number.isNaN(smoothness) ? {} : { smoothness }),
     }).generateSvg(contributions, userName);
 
-    const outDir = path.resolve(process.cwd(), "assets");
-    fs.mkdirSync(outDir, { recursive: true });
-    const outPath = path.join(outDir, `${userName}-${mode}.svg`);
+    const outPath = outArg
+      ? path.resolve(process.cwd(), outArg)
+      : path.join(process.cwd(), "assets", `${userName}-${mode}.svg`);
+    fs.mkdirSync(path.dirname(outPath), { recursive: true });
     fs.writeFileSync(outPath, svg, "utf-8");
     console.log(`SVG (${mode}) saved to: ${outPath}`);
   } catch (error) {

@@ -1,0 +1,39 @@
+# Copy this into your profile repo at .github/workflows/profile-3d.yml
+# (your profile repo is the one named exactly after your username).
+# Replace OWNER/gh-contributions-3d with the repo path where this action lives.
+
+name: 3D contribution graph
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # daily at 00:00 UTC
+  workflow_dispatch: # lets you trigger it manually
+  push:
+    branches: [main]
+
+permissions:
+  contents: write # needed to commit the generated SVG
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Render 3D terrain
+        uses: OWNER/gh-contributions-3d@main
+        with:
+          github_user: ${{ github.repository_owner }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          output: profile-3d-contrib/terrain.svg
+          # angle: medium      # low | medium | high | top, or a rowRise number
+          # smoothness: "1"    # 0 (sharp low-poly) .. 1 (smooth hills)
+          # mode: terrain      # terrain | columns
+
+      - name: Commit updated SVG
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add profile-3d-contrib/terrain.svg
+          git diff --staged --quiet || git commit -m "chore: update 3D contribution graph"
+          git push
