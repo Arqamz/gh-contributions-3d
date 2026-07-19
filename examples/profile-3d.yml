@@ -1,6 +1,5 @@
 # Copy this into your profile repo at .github/workflows/profile-3d.yml
 # (your profile repo is the one named exactly after your username).
-# Replace OWNER/gh-contributions-3d with the repo path where this action lives.
 
 name: 3D contribution graph
 
@@ -21,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Render 3D terrain
-        uses: OWNER/gh-contributions-3d@main
+        uses: Arqamz/gh-contributions-3d@main
         with:
           github_user: ${{ github.repository_owner }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
