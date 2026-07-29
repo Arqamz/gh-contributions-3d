@@ -1,0 +1,40 @@
+# Copy this into ANY repo at .github/workflows/repo-3d.yml to render that
+# repo's own commit history as 3D terrain, coloured by each day's top committer.
+
+name: 3D repo terrain
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # daily at 00:00 UTC
+  workflow_dispatch: # lets you trigger it manually
+  push:
+    branches: [main]
+
+permissions:
+  contents: write # needed to commit the generated SVG
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # REQUIRED: repo mode needs the full commit history,
+          # not the default shallow (depth-1) checkout.
+
+      - name: Render 3D repo terrain
+        uses: Arqamz/gh-contributions-3d@main
+        with:
+          source: repo # read this repo's commits instead of a user's calendar
+          output: profile-3d-contrib/repo.svg
+          # angle: medium      # low | medium | high | top, or a rowRise number
+          # smoothness: "1"    # 0 (sharp low-poly) .. 1 (smooth hills)
+          # mode: terrain      # terrain | columns
+
+      - name: Commit updated SVG
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add profile-3d-contrib/repo.svg
+          git diff --staged --quiet || git commit -m "chore: update 3D repo terrain"
+          git push

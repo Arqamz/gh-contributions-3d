@@ -1,0 +1,39 @@
+# Dogfooding: this repo renders its OWN commit history as 3D terrain and commits
+# the result to docs/self-terrain.svg, which the README embeds. Because the
+# action lives in this repo, the step references it locally with `uses: ./`
+# rather than `uses: Arqamz/gh-contributions-3d@v1`.
+
+name: Self terrain
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # daily at 00:00 UTC
+  workflow_dispatch: # run manually from the Actions tab
+  push:
+    branches: [main]
+
+permissions:
+  contents: write # needed to commit the regenerated SVG
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # REQUIRED: repo mode reads the full commit history,
+          # not the default shallow (depth-1) checkout.
+
+      - name: Render this repo's history as terrain
+        uses: ./ # the action in this very repo
+        with:
+          source: repo
+          output: docs/self-terrain.svg
+
+      - name: Commit updated SVG
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/self-terrain.svg
+          git diff --staged --quiet || git commit -m "chore: refresh self terrain"
+          git push

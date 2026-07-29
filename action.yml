@@ -5,12 +5,16 @@ branding:
   color: "green"
 
 inputs:
+  source:
+    description: "What to render: 'user' (a profile's contribution calendar) or 'repo' (this checked-out repository's commit history, coloured by each day's top committer)."
+    required: false
+    default: "user"
   github_user:
-    description: "GitHub username to render."
-    required: true
+    description: "GitHub username to render. Required when source is 'user'; ignored for 'repo'."
+    required: false
   github_token:
-    description: "Token with read access to the user's contributions. secrets.GITHUB_TOKEN works for public contributions; use a PAT for private ones."
-    required: true
+    description: "Token with read access to the user's contributions. secrets.GITHUB_TOKEN works for public contributions; use a PAT for private ones. Only needed when source is 'user'."
+    required: false
   output:
     description: "Path in your repo to write the SVG."
     required: false
@@ -42,6 +46,7 @@ runs:
       run: |
         bun run "${{ github.action_path }}/src/index.ts" \
           "${{ inputs.github_user }}" \
+          --source "${{ inputs.source }}" \
           --angle "${{ inputs.angle }}" \
           --smoothness "${{ inputs.smoothness }}" \
           --mode "${{ inputs.mode }}" \

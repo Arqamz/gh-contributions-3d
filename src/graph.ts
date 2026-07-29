@@ -69,6 +69,14 @@ interface Vec3 {
 export const GraphConfig = {
   mode: "terrain" as GraphMode,
 
+  // Colouring source. "height" is the default GitHub-green ramp (valleys pale,
+  // peaks dark green). "author" tints each day by its top committer's colour
+  // (repo mode): the height still drives light/dark, but the *hue* comes from
+  // `authorColors[id]`. Falls back to the green ramp for any cell without an
+  // author (empty days, or an id missing from the map).
+  colorBy: "height" as "height" | "author",
+  authorColors: {} as Record<string, string>,
+
   // Cell footprint / pitch (px in world space)
   step: 18, // distance between cell centers
   cellSize: 15, // column footprint (< step leaves a gap between columns)
@@ -178,10 +186,20 @@ interface Bounds {
   height: number;
   offsetX: number;
   offsetY: number;
+  legendHeight: number; // reserved band at the bottom for the contributor legend
+}
+
+export interface LegendEntry {
+  label: string;
+  color: string;
 }
 
 export class GraphSvgGenerator {
   private readonly cfg: Config;
+  private readonly authorRampCache = new Map<
+    string,
+    [string, string, string]
+  >();
 
   constructor(overrides: Partial<Config> = {}) {
     this.cfg = { ...GraphConfig, ...overrides };
@@ -191,14 +209,26 @@ export class GraphSvgGenerator {
     contributions: DayContribution[],
     userName: string,
     includeCredit = true,
+    legend: LegendEntry[] = [],
   ): string {
     const grid = this.buildGrid(contributions);
+    const authorGrid =
+      this.cfg.colorBy === "author"
+        ? this.buildAuthorGrid(contributions, grid[0]?.length ?? 0)
+        : null;
+    // Terrain slopes bleed a peak onto its empty neighbours; the fill grid says
+    // which committer "owns" each empty cell (the tallest nearby one) so those
+    // flanks take the peak's colour instead of falling back to green.
+    const authorFill =
+      authorGrid && this.cfg.mode === "terrain"
+        ? this.fillAuthorGrid(authorGrid, grid)
+        : null;
     const elements =
       this.cfg.mode === "terrain"
-        ? this.renderTerrain(grid)
-        : this.renderColumns(grid);
-    const bounds = this.calculateBounds(grid);
-    return this.wrapInSvg(elements, bounds, userName, includeCredit);
+        ? this.renderTerrain(grid, authorGrid, authorFill)
+        : this.renderColumns(grid, authorGrid);
+    const bounds = this.calculateBounds(grid, legend.length);
+    return this.wrapInSvg(elements, bounds, userName, includeCredit, legend);
   }
 
   // --- grid ----------------------------------------------------------------
@@ -213,6 +243,67 @@ export class GraphSvgGenerator {
       if (grid[c.weekday]) grid[c.weekday][c.weekIndex] = c.count;
     }
     return grid;
+  }
+
+  /** grid[day][week] = top-committer id (repo mode), or null for empty days. */
+  private buildAuthorGrid(
+    contributions: DayContribution[],
+    weeks: number,
+  ): (string | null)[][] {
+    const grid: (string | null)[][] = Array.from({ length: 7 }, () =>
+      new Array(weeks).fill(null),
+    );
+    for (const c of contributions) {
+      if (grid[c.weekday] && c.topAuthor)
+        grid[c.weekday][c.weekIndex] = c.topAuthor;
+    }
+    return grid;
+  }
+
+  /**
+   * Assign every empty cell the committer of its dominant nearby peak, so the
+   * slopes that rise toward a tall column adopt that column's colour instead of
+   * defaulting to green. Each committed neighbour within `FILL_RADIUS` votes with
+   * weight `count / distance²` (taller + closer wins); cells with no committed
+   * neighbour stay null and read as neutral ground. The height gate in
+   * `renderTerrain` then only applies this to the raised flanks, not flat ground.
+   */
+  private fillAuthorGrid(
+    authorGrid: (string | null)[][],
+    grid: number[][],
+  ): (string | null)[][] {
+    const R = GraphSvgGenerator.FILL_RADIUS;
+    const days = authorGrid.length;
+    const weeks = authorGrid[0]?.length ?? 0;
+    const out = authorGrid.map((row) => row.slice());
+    for (let d = 0; d < days; d++) {
+      for (let w = 0; w < weeks; w++) {
+        if (authorGrid[d][w]) continue; // keep real committers untouched
+        const score = new Map<string, number>();
+        for (let dd = -R; dd <= R; dd++) {
+          for (let ww = -R; ww <= R; ww++) {
+            if (dd === 0 && ww === 0) continue;
+            const nd = d + dd;
+            const nw = w + ww;
+            if (nd < 0 || nd >= days || nw < 0 || nw >= weeks) continue;
+            const a = authorGrid[nd][nw];
+            if (!a) continue;
+            const weight = grid[nd][nw] / (dd * dd + ww * ww);
+            score.set(a, (score.get(a) ?? 0) + weight);
+          }
+        }
+        let best = -1;
+        let pick: string | null = null;
+        for (const [a, s] of score) {
+          if (s > best || (s === best && (pick === null || a < pick))) {
+            best = s;
+            pick = a;
+          }
+        }
+        out[d][w] = pick;
+      }
+    }
+    return out;
   }
 
   /** High-percentile value used to normalize heights (robust to a single spike). */
@@ -258,7 +349,10 @@ export class GraphSvgGenerator {
 
   // --- columns mode --------------------------------------------------------
 
-  private renderColumns(grid: number[][]): string[] {
+  private renderColumns(
+    grid: number[][],
+    authorGrid: (string | null)[][] | null,
+  ): string[] {
     const peak = this.peakValue(grid);
     const { cellSize, step, colors } = this.cfg;
     const inset = (step - cellSize) / 2;
@@ -285,7 +379,13 @@ export class GraphSvgGenerator {
         out.push(this.renderFloorTile(wx, dy, cellSize, colors.empty));
         continue;
       }
-      out.push(...this.renderBox(wx, dy, cellSize, count, peak));
+      // Repo mode: the column takes its top committer's hue; otherwise the
+      // GitHub-green level ramp. Faces are shaded from this base either way.
+      const author = authorGrid?.[day]?.[week] ?? null;
+      const base = author
+        ? this.authorBaseColor(author)
+        : this.colorForLevel(count);
+      out.push(...this.renderBox(wx, dy, cellSize, count, peak, base));
     }
     return out;
   }
@@ -311,10 +411,10 @@ export class GraphSvgGenerator {
     s: number,
     count: number,
     peak: number,
+    base: string,
   ): string[] {
     const norm = Math.min(1, count / peak);
     const h = this.cfg.baseHeight + norm * this.cfg.heightScale;
-    const base = this.colorForLevel(count);
 
     // 8 corners: b* = base (z=0), t* = top (z=h). Numbered around the footprint.
     const b1 = this.project(wx, dy, 0);
@@ -366,7 +466,11 @@ export class GraphSvgGenerator {
 
   // --- terrain mode --------------------------------------------------------
 
-  private renderTerrain(grid: number[][]): string[] {
+  private renderTerrain(
+    grid: number[][],
+    authorGrid: (string | null)[][] | null,
+    authorFill: (string | null)[][] | null,
+  ): string[] {
     const days = grid.length; // 7
     const weeks = grid[0]?.length ?? 0;
 
@@ -456,6 +560,26 @@ export class GraphSvgGenerator {
 
     const zMax = heightScale || 1;
 
+    // Colour for a fine facet/wall: in author (repo) mode, map the fine cell
+    // back to its coarse day/week, look up that day's top committer, and tint by
+    // their hue; otherwise use the green height ramp. `tNorm` is the facet's
+    // normalised height (0..1) and still drives light valleys -> dark peaks.
+    const cellColor = (fi: number, fj: number, tNorm: number): string => {
+      if (authorGrid) {
+        const day = Math.min(days - 1, Math.floor(fi / S));
+        const week = Math.min(weeks - 1, Math.floor(fj / S));
+        // A committed day always takes its author's colour. An empty cell takes
+        // the colour propagated from its dominant peak, but only where the
+        // surface is actually raised (`GROUND_T`) — flat ground stays green.
+        const direct = authorGrid[day]?.[week] ?? null;
+        if (direct) return this.colorForHeightAuthored(tNorm, direct);
+        const filled = authorFill?.[day]?.[week] ?? null;
+        if (filled && tNorm > GraphSvgGenerator.GROUND_T)
+          return this.colorForHeightAuthored(tNorm, filled);
+      }
+      return this.colorForHeight(tNorm);
+    };
+
     // A face is any polygon (top triangle or skirt quad) in world space, tagged
     // with a painter depth. `skirt` faces are the vertical perimeter walls that
     // close the heightfield into a solid mass; they are back-face culled.
@@ -484,7 +608,7 @@ export class GraphSvgGenerator {
           faces.push({
             verts: t,
             depth: d,
-            color: this.colorForHeight(centerZ / zMax),
+            color: cellColor(fi, fj, centerZ / zMax),
             brightness: this.lambert(t[0], t[1], t[2]),
             skirt: false,
           });
@@ -514,7 +638,7 @@ export class GraphSvgGenerator {
           { x: top1.x, y: top1.y, z: baseZ },
         ],
         depth: fineDepth(fi, fj),
-        color: this.colorForHeight(avgTop / zMax),
+        color: cellColor(fi, fj, avgTop / zMax),
         brightness: this.cfg.skirtBrightness,
         skirt: true,
       });
@@ -636,6 +760,37 @@ export class GraphSvgGenerator {
     return this.mixHex(ramp[i], ramp[i + 1], f);
   }
 
+  /** A contributor's mid swatch colour (used flat for column faces). */
+  private authorBaseColor(author: string): string {
+    return this.cfg.authorColors[author] ?? this.cfg.colors.terrainFloor;
+  }
+
+  /**
+   * Author-tinted analogue of `colorForHeight`: a pale-floor -> base -> deep-peak
+   * ramp derived from the contributor's swatch, so a busy day reads as a
+   * saturated peak of their colour and a quiet one as a washed-out tint of it.
+   * Mirrors the green ramp's shape (same gamma easing) but in the author's hue.
+   */
+  private colorForHeightAuthored(t: number, author: string): string {
+    const base = this.cfg.authorColors[author];
+    if (!base) return this.colorForHeight(t);
+    let ramp = this.authorRampCache.get(author);
+    if (!ramp) {
+      ramp = [
+        this.mixHex("#ffffff", base, 0.32), // washed-out valley tint
+        base,
+        this.mixHex(base, "#000000", 0.42), // darkened peak
+      ];
+      this.authorRampCache.set(author, ramp);
+    }
+    const clamped = Math.max(0, Math.min(1, t));
+    const eased = Math.pow(clamped, this.cfg.colorGamma);
+    const scaled = eased * (ramp.length - 1);
+    const i = Math.min(ramp.length - 2, Math.floor(scaled));
+    const f = scaled - i;
+    return this.mixHex(ramp[i], ramp[i + 1], f);
+  }
+
   private mixHex(a: string, b: string, t: number): string {
     const ca = this.hexToRgb(a);
     const cb = this.hexToRgb(b);
@@ -707,7 +862,27 @@ export class GraphSvgGenerator {
     return `<polygon points="${points}" fill="${fill}" class="mesh"/>`;
   }
 
-  private calculateBounds(grid: number[][]): Bounds {
+  // Repo-mode colour propagation: how far (in cells) a peak's colour spreads
+  // onto empty neighbours, and the normalised height below which a filled cell
+  // is treated as flat ground and stays green rather than taking a peak colour.
+  private static readonly FILL_RADIUS = 2;
+  private static readonly GROUND_T = 0.05;
+
+  // Legend layout constants (shared by bounds reservation and rendering).
+  private static readonly LEGEND_ENTRY_W = 170; // px budget per contributor chip
+  private static readonly LEGEND_ROW_H = 20; // px per legend row
+
+  private legendRows(width: number, legendCount: number): number {
+    if (legendCount <= 0) return 0;
+    const usable = width - this.cfg.padding * 2;
+    const perRow = Math.max(
+      1,
+      Math.floor(usable / GraphSvgGenerator.LEGEND_ENTRY_W),
+    );
+    return Math.ceil(legendCount / perRow);
+  }
+
+  private calculateBounds(grid: number[][], legendCount = 0): Bounds {
     const days = grid.length;
     const weeks = grid[0]?.length ?? 0;
     const { step, heightScale, baseHeight, padding, titleHeight } = this.cfg;
@@ -739,12 +914,50 @@ export class GraphSvgGenerator {
     const minY = Math.min(...ys);
     const maxY = Math.max(...ys);
 
+    const width = maxX - minX + padding * 2;
+    const graphHeight = maxY - minY + padding * 2 + titleHeight;
+    const rows = this.legendRows(width, legendCount);
+    const legendHeight =
+      rows > 0 ? rows * GraphSvgGenerator.LEGEND_ROW_H + 14 : 0;
+
     return {
-      width: maxX - minX + padding * 2,
-      height: maxY - minY + padding * 2 + titleHeight,
+      width,
+      height: graphHeight + legendHeight,
       offsetX: -minX + padding,
       offsetY: -minY + padding + titleHeight,
+      legendHeight,
     };
+  }
+
+  /** Bottom-of-frame swatch+label chips for the repo-mode contributor colours. */
+  private renderLegend(bounds: Bounds, legend: LegendEntry[]): string {
+    if (legend.length === 0 || bounds.legendHeight === 0) return "";
+    const { padding } = this.cfg;
+    const entryW = GraphSvgGenerator.LEGEND_ENTRY_W;
+    const rowH = GraphSvgGenerator.LEGEND_ROW_H;
+    const perRow = Math.max(
+      1,
+      Math.floor((bounds.width - padding * 2) / entryW),
+    );
+    const top = bounds.height - bounds.legendHeight + 10;
+    const parts: string[] = [];
+    legend.forEach((e, i) => {
+      const col = i % perRow;
+      const row = Math.floor(i / perRow);
+      const x = padding + col * entryW;
+      const y = top + row * rowH;
+      // Truncate long names so chips don't overrun their column.
+      const label = e.label.length > 22 ? `${e.label.slice(0, 21)}…` : e.label;
+      parts.push(
+        `<rect x="${x}" y="${y}" width="11" height="11" rx="2" fill="${e.color}"/>` +
+          `<text x="${x + 16}" y="${y + 10}" class="legend">${this.escapeXml(label)}</text>`,
+      );
+    });
+    return parts.join("\n  ");
+  }
+
+  private escapeXml(s: string): string {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
   private wrapInSvg(
@@ -752,12 +965,14 @@ export class GraphSvgGenerator {
     bounds: Bounds,
     userName: string,
     includeCredit: boolean,
+    legend: LegendEntry[] = [],
   ): string {
     const w = bounds.width.toFixed(0);
     const h = bounds.height.toFixed(0);
     const credit = includeCredit
-      ? `<text x="${bounds.width - 8}" y="${bounds.height - 8}" class="credit" text-anchor="end">github.com/arqamz/gh-contributions-3d</text>`
+      ? `<text x="${bounds.width - 8}" y="${bounds.height - 6}" class="credit" text-anchor="end">github.com/Arqamz/gh-contributions-3d</text>`
       : "";
+    const legendSvg = this.renderLegend(bounds, legend);
 
     return `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
@@ -767,6 +982,7 @@ export class GraphSvgGenerator {
       .title { font: 600 16px 'Segoe UI', Arial, sans-serif; fill: #8b949e; }
       .subtitle { font: 400 12px 'Segoe UI', Arial, sans-serif; fill: #8b949e; }
       .credit { font: 8px 'Segoe UI', Arial, sans-serif; fill: #6e7781; opacity: 0.8; }
+      .legend { font: 400 11px 'Segoe UI', Arial, sans-serif; fill: #57606a; }
       .graph { filter: drop-shadow(0 1px 3px rgba(0,0,0,0.15)); }
       .mesh { stroke: ${this.cfg.colors.mesh}; stroke-width: ${this.cfg.meshStroke}; stroke-opacity: ${this.cfg.meshOpacity}; }
     </style>
@@ -776,6 +992,7 @@ export class GraphSvgGenerator {
   <g class="graph" transform="translate(${bounds.offsetX.toFixed(2)}, ${bounds.offsetY.toFixed(2)})">
     ${elements.join("\n    ")}
   </g>
+  ${legendSvg}
   ${credit}
 </svg>`;
   }
