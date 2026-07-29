@@ -23,7 +23,7 @@ jobs:
           # not the default shallow (depth-1) checkout.
 
       - name: Render 3D repo terrain
-        uses: Arqamz/gh-contributions-3d@main
+        uses: Arqamz/gh-contributions-3d@v1
         with:
           source: repo # read this repo's commits instead of a user's calendar
           output: profile-3d-contrib/repo.svg

@@ -29,7 +29,7 @@ Keep it fresh on your profile README via GitHub Actions.
        steps:
          - uses: actions/checkout@v4
          - name: Render 3D terrain
-           uses: Arqamz/gh-contributions-3d@main
+           uses: Arqamz/gh-contributions-3d@v1
            with:
              github_user: ${{ github.repository_owner }}
              github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -107,7 +107,7 @@ jobs:
         with:
           fetch-depth: 0 # required: repo mode needs full history, not a shallow clone
       - name: Render 3D repo terrain
-        uses: Arqamz/gh-contributions-3d@main
+        uses: Arqamz/gh-contributions-3d@v1
         with:
           source: repo
           output: profile-3d-contrib/repo.svg

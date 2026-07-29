@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Render 3D terrain
-        uses: Arqamz/gh-contributions-3d@main
+        uses: Arqamz/gh-contributions-3d@v1
         with:
           github_user: ${{ github.repository_owner }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
