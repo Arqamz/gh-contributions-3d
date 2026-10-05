@@ -347,39 +347,39 @@
     <polygon points="882,-148 888,-148 886,-142" fill="#731b1b" class="mesh"/>
     <polygon points="882,-148 886,-142 880,-142" fill="#731b1b" class="mesh"/>
     <polygon points="882,-148 888,-148 888,0 882,0" fill="#521313" stroke="#521313" stroke-width="0.6"/>
-    <polygon points="888,-148 894,-148 892,-141" fill="#731b1b" class="mesh"/>
-    <polygon points="888,-148 892,-141 886,-142" fill="#731b1b" class="mesh"/>
+    <polygon points="888,-148 894,-148 892,-142" fill="#741b1b" class="mesh"/>
+    <polygon points="888,-148 892,-142 886,-142" fill="#731b1b" class="mesh"/>
     <polygon points="888,-148 894,-148 894,0 888,0" fill="#521313" stroke="#521313" stroke-width="0.6"/>
-    <polygon points="894,-148 900,-147 898,-141" fill="#711a1a" class="mesh"/>
-    <polygon points="894,-148 898,-141 892,-141" fill="#711a1a" class="mesh"/>
-    <polygon points="894,-148 900,-147 900,0 894,0" fill="#521313" stroke="#521313" stroke-width="0.6"/>
-    <polygon points="900,-147 906,-144 904,-138" fill="#6b1919" class="mesh"/>
-    <polygon points="900,-147 904,-138 898,-141" fill="#6b1919" class="mesh"/>
-    <polygon points="900,-147 906,-144 906,0 900,0" fill="#531313" stroke="#531313" stroke-width="0.6"/>
-    <polygon points="906,-144 912,-139 910,-132" fill="#621717" class="mesh"/>
-    <polygon points="906,-144 910,-132 904,-138" fill="#611717" class="mesh"/>
-    <polygon points="906,-144 912,-139 912,0 906,0" fill="#561414" stroke="#561414" stroke-width="0.6"/>
-    <polygon points="912,-139 918,-129 916,-122" fill="#5c1616" class="mesh"/>
-    <polygon points="912,-139 916,-122 910,-132" fill="#5a1515" class="mesh"/>
-    <polygon points="912,-139 918,-129 918,0 912,0" fill="#591414" stroke="#591414" stroke-width="0.6"/>
-    <polygon points="918,-129 924,-114 922,-108" fill="#611616" class="mesh"/>
-    <polygon points="918,-129 922,-108 916,-122" fill="#5e1616" class="mesh"/>
-    <polygon points="918,-129 924,-114 924,0 918,0" fill="#5f1616" stroke="#5f1616" stroke-width="0.6"/>
-    <polygon points="924,-114 930,-95 928,-89" fill="#691818" class="mesh"/>
-    <polygon points="924,-114 928,-89 922,-108" fill="#661818" class="mesh"/>
-    <polygon points="924,-114 930,-95 930,0 924,0" fill="#681818" stroke="#681818" stroke-width="0.6"/>
-    <polygon points="930,-95 936,-75 934,-68" fill="#751b1b" class="mesh"/>
-    <polygon points="930,-95 934,-68 928,-89" fill="#701a1a" class="mesh"/>
-    <polygon points="930,-95 936,-75 936,0 930,0" fill="#721b1b" stroke="#721b1b" stroke-width="0.6"/>
-    <polygon points="936,-75 942,-56 940,-49" fill="#801e1e" class="mesh"/>
-    <polygon points="936,-75 940,-49 934,-68" fill="#7c1d1d" class="mesh"/>
-    <polygon points="936,-75 942,-56 942,0 936,0" fill="#7e1d1d" stroke="#7e1d1d" stroke-width="0.6"/>
-    <polygon points="942,-56 948,-42 946,-35" fill="#842d2d" class="mesh"/>
-    <polygon points="942,-56 946,-35 940,-49" fill="#832828" class="mesh"/>
-    <polygon points="942,-56 948,-42 948,0 942,0" fill="#832b2b" stroke="#832b2b" stroke-width="0.6"/>
-    <polygon points="948,-42 954,-35 952,-29" fill="#973e3e" class="mesh"/>
-    <polygon points="948,-42 952,-29 946,-35" fill="#963b3b" class="mesh"/>
-    <polygon points="948,-42 954,-35 954,0 948,0" fill="#863636" stroke="#863636" stroke-width="0.6"/>
+    <polygon points="894,-148 900,-148 898,-141" fill="#731b1b" class="mesh"/>
+    <polygon points="894,-148 898,-141 892,-142" fill="#731b1b" class="mesh"/>
+    <polygon points="894,-148 900,-148 900,0 894,0" fill="#521313" stroke="#521313" stroke-width="0.6"/>
+    <polygon points="900,-148 906,-147 904,-141" fill="#711a1a" class="mesh"/>
+    <polygon points="900,-148 904,-141 898,-141" fill="#711a1a" class="mesh"/>
+    <polygon points="900,-148 906,-147 906,0 900,0" fill="#521313" stroke="#521313" stroke-width="0.6"/>
+    <polygon points="906,-147 912,-146 910,-139" fill="#6e1a1a" class="mesh"/>
+    <polygon points="906,-147 910,-139 904,-141" fill="#6e1a1a" class="mesh"/>
+    <polygon points="906,-147 912,-146 912,0 906,0" fill="#531313" stroke="#531313" stroke-width="0.6"/>
+    <polygon points="912,-146 918,-144 916,-136" fill="#6a1919" class="mesh"/>
+    <polygon points="912,-146 916,-136 910,-139" fill="#691818" class="mesh"/>
+    <polygon points="912,-146 918,-144 918,0 912,0" fill="#541313" stroke="#541313" stroke-width="0.6"/>
+    <polygon points="918,-144 924,-140 922,-132" fill="#651717" class="mesh"/>
+    <polygon points="918,-144 922,-132 916,-136" fill="#651717" class="mesh"/>
+    <polygon points="918,-144 924,-140 924,0 918,0" fill="#551414" stroke="#551414" stroke-width="0.6"/>
+    <polygon points="924,-140 930,-136 928,-127" fill="#611717" class="mesh"/>
+    <polygon points="924,-140 928,-127 922,-132" fill="#611717" class="mesh"/>
+    <polygon points="924,-140 930,-136 930,0 924,0" fill="#571414" stroke="#571414" stroke-width="0.6"/>
+    <polygon points="930,-136 936,-131 934,-121" fill="#5f1616" class="mesh"/>
+    <polygon points="930,-136 934,-121 928,-127" fill="#5f1616" class="mesh"/>
+    <polygon points="930,-136 936,-131 936,0 930,0" fill="#591515" stroke="#591515" stroke-width="0.6"/>
+    <polygon points="936,-131 942,-126 940,-116" fill="#5f1616" class="mesh"/>
+    <polygon points="936,-131 940,-116 934,-121" fill="#601717" class="mesh"/>
+    <polygon points="936,-131 942,-126 942,0 936,0" fill="#5c1515" stroke="#5c1515" stroke-width="0.6"/>
+    <polygon points="942,-126 948,-123 946,-112" fill="#631717" class="mesh"/>
+    <polygon points="942,-126 946,-112 940,-116" fill="#641717" class="mesh"/>
+    <polygon points="942,-126 948,-123 948,0 942,0" fill="#5e1616" stroke="#5e1616" stroke-width="0.6"/>
+    <polygon points="948,-123 954,-121 952,-110" fill="#681818" class="mesh"/>
+    <polygon points="948,-123 952,-110 946,-112" fill="#691818" class="mesh"/>
+    <polygon points="948,-123 954,-121 954,0 948,0" fill="#5f1616" stroke="#5f1616" stroke-width="0.6"/>
     <polygon points="-2,7 4,7 1,13" fill="#aac7ae" class="mesh"/>
     <polygon points="-2,7 1,13 -5,13" fill="#aac7ae" class="mesh"/>
     <polygon points="4,7 10,7 7,13" fill="#aac7ae" class="mesh"/>
@@ -676,28 +676,28 @@
     <polygon points="874,-142 877,-135 871,-135" fill="#731b1b" class="mesh"/>
     <polygon points="880,-142 886,-142 883,-135" fill="#731b1b" class="mesh"/>
     <polygon points="880,-142 883,-135 877,-135" fill="#731b1b" class="mesh"/>
-    <polygon points="886,-142 892,-141 889,-135" fill="#731b1b" class="mesh"/>
-    <polygon points="886,-142 889,-135 883,-135" fill="#731b1b" class="mesh"/>
-    <polygon points="892,-141 898,-141 895,-134" fill="#711a1a" class="mesh"/>
-    <polygon points="892,-141 895,-134 889,-135" fill="#711a1a" class="mesh"/>
-    <polygon points="898,-141 904,-138 901,-131" fill="#6b1919" class="mesh"/>
-    <polygon points="898,-141 901,-131 895,-134" fill="#6b1919" class="mesh"/>
-    <polygon points="904,-138 910,-132 907,-126" fill="#621717" class="mesh"/>
-    <polygon points="904,-138 907,-126 901,-131" fill="#611717" class="mesh"/>
-    <polygon points="910,-132 916,-122 913,-116" fill="#5c1616" class="mesh"/>
-    <polygon points="910,-132 913,-116 907,-126" fill="#5a1515" class="mesh"/>
-    <polygon points="916,-122 922,-108 919,-101" fill="#611616" class="mesh"/>
-    <polygon points="916,-122 919,-101 913,-116" fill="#5e1616" class="mesh"/>
-    <polygon points="922,-108 928,-89 925,-82" fill="#691818" class="mesh"/>
-    <polygon points="922,-108 925,-82 919,-101" fill="#661818" class="mesh"/>
-    <polygon points="928,-89 934,-68 931,-62" fill="#751b1b" class="mesh"/>
-    <polygon points="928,-89 931,-62 925,-82" fill="#701a1a" class="mesh"/>
-    <polygon points="934,-68 940,-49 937,-43" fill="#801e1e" class="mesh"/>
-    <polygon points="934,-68 937,-43 931,-62" fill="#7c1d1d" class="mesh"/>
-    <polygon points="940,-49 946,-35 943,-28" fill="#842d2d" class="mesh"/>
-    <polygon points="940,-49 943,-28 937,-43" fill="#832828" class="mesh"/>
-    <polygon points="946,-35 952,-29 949,-22" fill="#973e3e" class="mesh"/>
-    <polygon points="946,-35 949,-22 943,-28" fill="#963b3b" class="mesh"/>
+    <polygon points="886,-142 892,-142 889,-135" fill="#741b1b" class="mesh"/>
+    <polygon points="886,-142 889,-135 883,-135" fill="#741b1b" class="mesh"/>
+    <polygon points="892,-142 898,-141 895,-135" fill="#731b1b" class="mesh"/>
+    <polygon points="892,-142 895,-135 889,-135" fill="#731b1b" class="mesh"/>
+    <polygon points="898,-141 904,-141 901,-134" fill="#701a1a" class="mesh"/>
+    <polygon points="898,-141 901,-134 895,-135" fill="#701a1a" class="mesh"/>
+    <polygon points="904,-141 910,-139 907,-132" fill="#6b1919" class="mesh"/>
+    <polygon points="904,-141 907,-132 901,-134" fill="#6b1919" class="mesh"/>
+    <polygon points="910,-139 916,-136 913,-128" fill="#641818" class="mesh"/>
+    <polygon points="910,-139 913,-128 907,-132" fill="#641818" class="mesh"/>
+    <polygon points="916,-136 922,-132 919,-122" fill="#5d1616" class="mesh"/>
+    <polygon points="916,-136 919,-122 913,-128" fill="#5d1515" class="mesh"/>
+    <polygon points="922,-132 928,-127 925,-115" fill="#591414" class="mesh"/>
+    <polygon points="922,-132 925,-115 919,-122" fill="#591414" class="mesh"/>
+    <polygon points="928,-127 934,-121 931,-108" fill="#5c1616" class="mesh"/>
+    <polygon points="928,-127 931,-108 925,-115" fill="#5c1616" class="mesh"/>
+    <polygon points="934,-121 940,-116 937,-100" fill="#5f1616" class="mesh"/>
+    <polygon points="934,-121 937,-100 931,-108" fill="#5f1616" class="mesh"/>
+    <polygon points="940,-116 946,-112 943,-95" fill="#621717" class="mesh"/>
+    <polygon points="940,-116 943,-95 937,-100" fill="#631717" class="mesh"/>
+    <polygon points="946,-112 952,-110 949,-93" fill="#631717" class="mesh"/>
+    <polygon points="946,-112 949,-93 943,-95" fill="#641818" class="mesh"/>
     <polygon points="-5,13 1,13 -1,20" fill="#aac7ae" class="mesh"/>
     <polygon points="-5,13 -1,20 -7,20" fill="#aac7ae" class="mesh"/>
     <polygon points="1,13 7,13 5,20" fill="#aac7ae" class="mesh"/>
@@ -994,28 +994,28 @@
     <polygon points="871,-135 875,-129 869,-129" fill="#731b1b" class="mesh"/>
     <polygon points="877,-135 883,-135 881,-129" fill="#731b1b" class="mesh"/>
     <polygon points="877,-135 881,-129 875,-129" fill="#731b1b" class="mesh"/>
-    <polygon points="883,-135 889,-135 887,-128" fill="#731b1b" class="mesh"/>
-    <polygon points="883,-135 887,-128 881,-129" fill="#731b1b" class="mesh"/>
-    <polygon points="889,-135 895,-134 893,-127" fill="#711a1a" class="mesh"/>
-    <polygon points="889,-135 893,-127 887,-128" fill="#711a1a" class="mesh"/>
-    <polygon points="895,-134 901,-131 899,-125" fill="#6b1919" class="mesh"/>
-    <polygon points="895,-134 899,-125 893,-127" fill="#6b1919" class="mesh"/>
-    <polygon points="901,-131 907,-126 905,-119" fill="#621717" class="mesh"/>
-    <polygon points="901,-131 905,-119 899,-125" fill="#611717" class="mesh"/>
-    <polygon points="907,-126 913,-116 911,-109" fill="#5c1616" class="mesh"/>
-    <polygon points="907,-126 911,-109 905,-119" fill="#5a1515" class="mesh"/>
-    <polygon points="913,-116 919,-101 917,-94" fill="#611616" class="mesh"/>
-    <polygon points="913,-116 917,-94 911,-109" fill="#5e1616" class="mesh"/>
-    <polygon points="919,-101 925,-82 923,-76" fill="#691818" class="mesh"/>
-    <polygon points="919,-101 923,-76 917,-94" fill="#661818" class="mesh"/>
-    <polygon points="925,-82 931,-62 929,-55" fill="#751b1b" class="mesh"/>
-    <polygon points="925,-82 929,-55 923,-76" fill="#701a1a" class="mesh"/>
-    <polygon points="931,-62 937,-43 935,-36" fill="#801e1e" class="mesh"/>
-    <polygon points="931,-62 935,-36 929,-55" fill="#7c1d1d" class="mesh"/>
-    <polygon points="937,-43 943,-28 941,-22" fill="#842d2d" class="mesh"/>
-    <polygon points="937,-43 941,-22 935,-36" fill="#832828" class="mesh"/>
-    <polygon points="943,-28 949,-22 947,-15" fill="#973e3e" class="mesh"/>
-    <polygon points="943,-28 947,-15 941,-22" fill="#963b3b" class="mesh"/>
+    <polygon points="883,-135 889,-135 887,-128" fill="#741b1b" class="mesh"/>
+    <polygon points="883,-135 887,-128 881,-129" fill="#741b1b" class="mesh"/>
+    <polygon points="889,-135 895,-135 893,-128" fill="#721b1b" class="mesh"/>
+    <polygon points="889,-135 893,-128 887,-128" fill="#721b1b" class="mesh"/>
+    <polygon points="895,-135 901,-134 899,-127" fill="#6e1a1a" class="mesh"/>
+    <polygon points="895,-135 899,-127 893,-128" fill="#6f1a1a" class="mesh"/>
+    <polygon points="901,-134 907,-132 905,-124" fill="#681818" class="mesh"/>
+    <polygon points="901,-134 905,-124 899,-127" fill="#691818" class="mesh"/>
+    <polygon points="907,-132 913,-128 911,-119" fill="#5f1616" class="mesh"/>
+    <polygon points="907,-132 911,-119 905,-124" fill="#5f1616" class="mesh"/>
+    <polygon points="913,-128 919,-122 917,-111" fill="#581414" class="mesh"/>
+    <polygon points="913,-128 917,-111 911,-119" fill="#581515" class="mesh"/>
+    <polygon points="919,-122 925,-115 923,-102" fill="#5c1515" class="mesh"/>
+    <polygon points="919,-122 923,-102 917,-111" fill="#5b1515" class="mesh"/>
+    <polygon points="925,-115 931,-108 929,-91" fill="#601616" class="mesh"/>
+    <polygon points="925,-115 929,-91 923,-102" fill="#5f1616" class="mesh"/>
+    <polygon points="931,-108 937,-100 935,-82" fill="#641818" class="mesh"/>
+    <polygon points="931,-108 935,-82 929,-91" fill="#641818" class="mesh"/>
+    <polygon points="937,-100 943,-95 941,-75" fill="#681818" class="mesh"/>
+    <polygon points="937,-100 941,-75 935,-82" fill="#691818" class="mesh"/>
+    <polygon points="943,-95 949,-93 947,-71" fill="#691818" class="mesh"/>
+    <polygon points="943,-95 947,-71 941,-75" fill="#6b1919" class="mesh"/>
     <polygon points="-7,20 -1,20 -3,26" fill="#aac7ae" class="mesh"/>
     <polygon points="-7,20 -3,26 -9,26" fill="#aac7ae" class="mesh"/>
     <polygon points="-1,20 5,20 3,26" fill="#aac7ae" class="mesh"/>
@@ -1314,26 +1314,26 @@
     <polygon points="875,-129 879,-122 873,-122" fill="#731b1b" class="mesh"/>
     <polygon points="881,-129 887,-128 885,-122" fill="#731b1b" class="mesh"/>
     <polygon points="881,-129 885,-122 879,-122" fill="#731b1b" class="mesh"/>
-    <polygon points="887,-128 893,-127 891,-121" fill="#711a1a" class="mesh"/>
-    <polygon points="887,-128 891,-121 885,-122" fill="#711a1a" class="mesh"/>
-    <polygon points="893,-127 899,-125 897,-118" fill="#6b1919" class="mesh"/>
-    <polygon points="893,-127 897,-118 891,-121" fill="#6b1919" class="mesh"/>
-    <polygon points="899,-125 905,-119 903,-112" fill="#621717" class="mesh"/>
-    <polygon points="899,-125 903,-112 897,-118" fill="#611717" class="mesh"/>
-    <polygon points="905,-119 911,-109 909,-102" fill="#5c1616" class="mesh"/>
-    <polygon points="905,-119 909,-102 903,-112" fill="#5a1515" class="mesh"/>
-    <polygon points="911,-109 917,-94 915,-88" fill="#611616" class="mesh"/>
-    <polygon points="911,-109 915,-88 909,-102" fill="#5e1616" class="mesh"/>
-    <polygon points="917,-94 923,-76 921,-69" fill="#691818" class="mesh"/>
-    <polygon points="917,-94 921,-69 915,-88" fill="#661818" class="mesh"/>
-    <polygon points="923,-76 929,-55 927,-49" fill="#751b1b" class="mesh"/>
-    <polygon points="923,-76 927,-49 921,-69" fill="#701a1a" class="mesh"/>
-    <polygon points="929,-55 935,-36 933,-29" fill="#801e1e" class="mesh"/>
-    <polygon points="929,-55 933,-29 927,-49" fill="#7c1d1d" class="mesh"/>
-    <polygon points="935,-36 941,-22 939,-15" fill="#842d2d" class="mesh"/>
-    <polygon points="935,-36 939,-15 933,-29" fill="#832828" class="mesh"/>
-    <polygon points="941,-22 947,-15 945,-9" fill="#973e3e" class="mesh"/>
-    <polygon points="941,-22 945,-9 939,-15" fill="#963b3b" class="mesh"/>
+    <polygon points="887,-128 893,-128 891,-121" fill="#721b1b" class="mesh"/>
+    <polygon points="887,-128 891,-121 885,-122" fill="#721b1b" class="mesh"/>
+    <polygon points="893,-128 899,-127 897,-119" fill="#6e1919" class="mesh"/>
+    <polygon points="893,-128 897,-119 891,-121" fill="#6d1919" class="mesh"/>
+    <polygon points="899,-127 905,-124 903,-116" fill="#661818" class="mesh"/>
+    <polygon points="899,-127 903,-116 897,-119" fill="#651717" class="mesh"/>
+    <polygon points="905,-124 911,-119 909,-109" fill="#5c1515" class="mesh"/>
+    <polygon points="905,-124 909,-109 903,-116" fill="#5d1515" class="mesh"/>
+    <polygon points="911,-119 917,-111 915,-100" fill="#5a1515" class="mesh"/>
+    <polygon points="911,-119 915,-100 909,-109" fill="#591515" class="mesh"/>
+    <polygon points="917,-111 923,-102 921,-88" fill="#5f1616" class="mesh"/>
+    <polygon points="917,-111 921,-88 915,-100" fill="#5e1616" class="mesh"/>
+    <polygon points="923,-102 929,-91 927,-75" fill="#641818" class="mesh"/>
+    <polygon points="923,-102 927,-75 921,-88" fill="#641717" class="mesh"/>
+    <polygon points="929,-91 935,-82 933,-62" fill="#6a1919" class="mesh"/>
+    <polygon points="929,-91 933,-62 927,-75" fill="#6a1919" class="mesh"/>
+    <polygon points="935,-82 941,-75 939,-53" fill="#6f1919" class="mesh"/>
+    <polygon points="935,-82 939,-53 933,-62" fill="#701a1a" class="mesh"/>
+    <polygon points="941,-75 947,-71 945,-49" fill="#711a1a" class="mesh"/>
+    <polygon points="941,-75 945,-49 939,-53" fill="#731b1b" class="mesh"/>
     <polygon points="-9,26 -3,26 -5,33" fill="#aac7ae" class="mesh"/>
     <polygon points="-9,26 -5,33 -11,33" fill="#aac7ae" class="mesh"/>
     <polygon points="-3,26 3,26 1,33" fill="#aac7ae" class="mesh"/>
@@ -1634,24 +1634,24 @@
     <polygon points="879,-122 883,-115 877,-115" fill="#731b1b" class="mesh"/>
     <polygon points="885,-122 891,-121 889,-114" fill="#711a1a" class="mesh"/>
     <polygon points="885,-122 889,-114 883,-115" fill="#711a1a" class="mesh"/>
-    <polygon points="891,-121 897,-118 895,-111" fill="#6b1919" class="mesh"/>
-    <polygon points="891,-121 895,-111 889,-114" fill="#6b1919" class="mesh"/>
-    <polygon points="897,-118 903,-112 901,-106" fill="#621717" class="mesh"/>
-    <polygon points="897,-118 901,-106 895,-111" fill="#611717" class="mesh"/>
-    <polygon points="903,-112 909,-102 907,-96" fill="#5c1616" class="mesh"/>
-    <polygon points="903,-112 907,-96 901,-106" fill="#5a1515" class="mesh"/>
-    <polygon points="909,-102 915,-88 913,-81" fill="#611616" class="mesh"/>
-    <polygon points="909,-102 913,-81 907,-96" fill="#5e1616" class="mesh"/>
-    <polygon points="915,-88 921,-69 919,-62" fill="#691818" class="mesh"/>
-    <polygon points="915,-88 919,-62 913,-81" fill="#661818" class="mesh"/>
-    <polygon points="921,-69 927,-49 925,-42" fill="#751b1b" class="mesh"/>
-    <polygon points="921,-69 925,-42 919,-62" fill="#701a1a" class="mesh"/>
-    <polygon points="927,-49 933,-29 931,-23" fill="#801e1e" class="mesh"/>
-    <polygon points="927,-49 931,-23 925,-42" fill="#7c1d1d" class="mesh"/>
-    <polygon points="933,-29 939,-15 937,-9" fill="#842d2d" class="mesh"/>
-    <polygon points="933,-29 937,-9 931,-23" fill="#832828" class="mesh"/>
-    <polygon points="939,-15 945,-9 943,-2" fill="#973e3e" class="mesh"/>
-    <polygon points="939,-15 943,-2 937,-9" fill="#963b3b" class="mesh"/>
+    <polygon points="891,-121 897,-119 895,-112" fill="#6d1919" class="mesh"/>
+    <polygon points="891,-121 895,-112 889,-114" fill="#6d1919" class="mesh"/>
+    <polygon points="897,-119 903,-116 901,-108" fill="#641717" class="mesh"/>
+    <polygon points="897,-119 901,-108 895,-112" fill="#641717" class="mesh"/>
+    <polygon points="903,-116 909,-109 907,-100" fill="#5a1515" class="mesh"/>
+    <polygon points="903,-116 907,-100 901,-108" fill="#5a1515" class="mesh"/>
+    <polygon points="909,-109 915,-100 913,-89" fill="#5c1616" class="mesh"/>
+    <polygon points="909,-109 913,-89 907,-100" fill="#5b1515" class="mesh"/>
+    <polygon points="915,-100 921,-88 919,-75" fill="#621717" class="mesh"/>
+    <polygon points="915,-100 919,-75 913,-89" fill="#611616" class="mesh"/>
+    <polygon points="921,-88 927,-75 925,-59" fill="#691818" class="mesh"/>
+    <polygon points="921,-88 925,-59 919,-75" fill="#681818" class="mesh"/>
+    <polygon points="927,-75 933,-62 931,-44" fill="#701a1a" class="mesh"/>
+    <polygon points="927,-75 931,-44 925,-59" fill="#701a1a" class="mesh"/>
+    <polygon points="933,-62 939,-53 937,-33" fill="#761b1b" class="mesh"/>
+    <polygon points="933,-62 937,-33 931,-44" fill="#771b1b" class="mesh"/>
+    <polygon points="939,-53 945,-49 943,-28" fill="#7a1d1d" class="mesh"/>
+    <polygon points="939,-53 943,-28 937,-33" fill="#7b1d1d" class="mesh"/>
     <polygon points="-11,33 -5,33 -8,40" fill="#aac7ae" class="mesh"/>
     <polygon points="-11,33 -8,40 -14,40" fill="#aac7ae" class="mesh"/>
     <polygon points="-5,33 1,33 -2,40" fill="#aac7ae" class="mesh"/>
@@ -1948,28 +1948,28 @@
     <polygon points="865,-115 868,-109 862,-109" fill="#731b1b" class="mesh"/>
     <polygon points="871,-115 877,-115 874,-109" fill="#731b1b" class="mesh"/>
     <polygon points="871,-115 874,-109 868,-109" fill="#731b1b" class="mesh"/>
-    <polygon points="877,-115 883,-115 880,-108" fill="#731b1b" class="mesh"/>
-    <polygon points="877,-115 880,-108 874,-109" fill="#731b1b" class="mesh"/>
+    <polygon points="877,-115 883,-115 880,-109" fill="#731b1b" class="mesh"/>
+    <polygon points="877,-115 880,-109 874,-109" fill="#731b1b" class="mesh"/>
     <polygon points="883,-115 889,-114 886,-108" fill="#711a1a" class="mesh"/>
-    <polygon points="883,-115 886,-108 880,-108" fill="#711a1a" class="mesh"/>
-    <polygon points="889,-114 895,-111 892,-105" fill="#6b1919" class="mesh"/>
-    <polygon points="889,-114 892,-105 886,-108" fill="#6b1919" class="mesh"/>
-    <polygon points="895,-111 901,-106 898,-99" fill="#621717" class="mesh"/>
-    <polygon points="895,-111 898,-99 892,-105" fill="#611717" class="mesh"/>
-    <polygon points="901,-106 907,-96 904,-89" fill="#5c1616" class="mesh"/>
-    <polygon points="901,-106 904,-89 898,-99" fill="#5a1515" class="mesh"/>
-    <polygon points="907,-96 913,-81 910,-75" fill="#611616" class="mesh"/>
-    <polygon points="907,-96 910,-75 904,-89" fill="#5e1616" class="mesh"/>
-    <polygon points="913,-81 919,-62 916,-56" fill="#691818" class="mesh"/>
-    <polygon points="913,-81 916,-56 910,-75" fill="#661818" class="mesh"/>
-    <polygon points="919,-62 925,-42 922,-35" fill="#751b1b" class="mesh"/>
-    <polygon points="919,-62 922,-35 916,-56" fill="#701a1a" class="mesh"/>
-    <polygon points="925,-42 931,-23 928,-16" fill="#801e1e" class="mesh"/>
-    <polygon points="925,-42 928,-16 922,-35" fill="#7c1d1d" class="mesh"/>
-    <polygon points="931,-23 937,-9 934,-2" fill="#842d2d" class="mesh"/>
-    <polygon points="931,-23 934,-2 928,-16" fill="#832828" class="mesh"/>
-    <polygon points="937,-9 943,-2 940,4" fill="#973e3e" class="mesh"/>
-    <polygon points="937,-9 940,4 934,-2" fill="#963b3b" class="mesh"/>
+    <polygon points="883,-115 886,-108 880,-109" fill="#711a1a" class="mesh"/>
+    <polygon points="889,-114 895,-112 892,-105" fill="#6c1919" class="mesh"/>
+    <polygon points="889,-114 892,-105 886,-108" fill="#6c1919" class="mesh"/>
+    <polygon points="895,-112 901,-108 898,-100" fill="#631717" class="mesh"/>
+    <polygon points="895,-112 898,-100 892,-105" fill="#621717" class="mesh"/>
+    <polygon points="901,-108 907,-100 904,-92" fill="#5a1515" class="mesh"/>
+    <polygon points="901,-108 904,-92 898,-100" fill="#5a1515" class="mesh"/>
+    <polygon points="907,-100 913,-89 910,-79" fill="#5e1616" class="mesh"/>
+    <polygon points="907,-100 910,-79 904,-92" fill="#5c1616" class="mesh"/>
+    <polygon points="913,-89 919,-75 916,-63" fill="#641818" class="mesh"/>
+    <polygon points="913,-89 916,-63 910,-79" fill="#631717" class="mesh"/>
+    <polygon points="919,-75 925,-59 922,-45" fill="#6d1919" class="mesh"/>
+    <polygon points="919,-75 922,-45 916,-63" fill="#6b1919" class="mesh"/>
+    <polygon points="925,-59 931,-44 928,-28" fill="#761b1b" class="mesh"/>
+    <polygon points="925,-59 928,-28 922,-45" fill="#751b1b" class="mesh"/>
+    <polygon points="931,-44 937,-33 934,-16" fill="#7d1d1d" class="mesh"/>
+    <polygon points="931,-44 934,-16 928,-28" fill="#7d1d1d" class="mesh"/>
+    <polygon points="937,-33 943,-28 940,-11" fill="#812020" class="mesh"/>
+    <polygon points="937,-33 940,-11 934,-16" fill="#822121" class="mesh"/>
     <polygon points="-14,40 -8,40 -10,46" fill="#aac7ae" class="mesh"/>
     <polygon points="-14,40 -10,46 -16,46" fill="#aac7ae" class="mesh"/>
     <polygon points="-8,40 -2,40 -4,46" fill="#aac7ae" class="mesh"/>
@@ -2266,28 +2266,28 @@
     <polygon points="862,-109 866,-102 860,-102" fill="#731b1b" class="mesh"/>
     <polygon points="868,-109 874,-109 872,-102" fill="#731b1b" class="mesh"/>
     <polygon points="868,-109 872,-102 866,-102" fill="#731b1b" class="mesh"/>
-    <polygon points="874,-109 880,-108 878,-102" fill="#731b1b" class="mesh"/>
+    <polygon points="874,-109 880,-109 878,-102" fill="#731b1b" class="mesh"/>
     <polygon points="874,-109 878,-102 872,-102" fill="#731b1b" class="mesh"/>
-    <polygon points="880,-108 886,-108 884,-101" fill="#711a1a" class="mesh"/>
-    <polygon points="880,-108 884,-101 878,-102" fill="#711a1a" class="mesh"/>
-    <polygon points="886,-108 892,-105 890,-98" fill="#6b1919" class="mesh"/>
-    <polygon points="886,-108 890,-98 884,-101" fill="#6b1919" class="mesh"/>
-    <polygon points="892,-105 898,-99 896,-93" fill="#621717" class="mesh"/>
-    <polygon points="892,-105 896,-93 890,-98" fill="#611717" class="mesh"/>
-    <polygon points="898,-99 904,-89 902,-83" fill="#5c1616" class="mesh"/>
-    <polygon points="898,-99 902,-83 896,-93" fill="#5a1515" class="mesh"/>
-    <polygon points="904,-89 910,-75 908,-68" fill="#611616" class="mesh"/>
-    <polygon points="904,-89 908,-68 902,-83" fill="#5e1616" class="mesh"/>
-    <polygon points="910,-75 916,-56 914,-49" fill="#691818" class="mesh"/>
-    <polygon points="910,-75 914,-49 908,-68" fill="#661818" class="mesh"/>
-    <polygon points="916,-56 922,-35 920,-29" fill="#751b1b" class="mesh"/>
-    <polygon points="916,-56 920,-29 914,-49" fill="#701a1a" class="mesh"/>
-    <polygon points="922,-35 928,-16 926,-10" fill="#801e1e" class="mesh"/>
-    <polygon points="922,-35 926,-10 920,-29" fill="#7c1d1d" class="mesh"/>
-    <polygon points="928,-16 934,-2 932,5" fill="#842d2d" class="mesh"/>
-    <polygon points="928,-16 932,5 926,-10" fill="#832828" class="mesh"/>
-    <polygon points="934,-2 940,4 938,11" fill="#973e3e" class="mesh"/>
-    <polygon points="934,-2 938,11 932,5" fill="#963b3b" class="mesh"/>
+    <polygon points="880,-109 886,-108 884,-101" fill="#711a1a" class="mesh"/>
+    <polygon points="880,-109 884,-101 878,-102" fill="#711a1a" class="mesh"/>
+    <polygon points="886,-108 892,-105 890,-99" fill="#6c1919" class="mesh"/>
+    <polygon points="886,-108 890,-99 884,-101" fill="#6b1919" class="mesh"/>
+    <polygon points="892,-105 898,-100 896,-93" fill="#621717" class="mesh"/>
+    <polygon points="892,-105 896,-93 890,-99" fill="#621717" class="mesh"/>
+    <polygon points="898,-100 904,-92 902,-84" fill="#5b1515" class="mesh"/>
+    <polygon points="898,-100 902,-84 896,-93" fill="#5a1515" class="mesh"/>
+    <polygon points="904,-92 910,-79 908,-70" fill="#5f1616" class="mesh"/>
+    <polygon points="904,-92 908,-70 902,-84" fill="#5d1616" class="mesh"/>
+    <polygon points="910,-79 916,-63 914,-53" fill="#671818" class="mesh"/>
+    <polygon points="910,-79 914,-53 908,-70" fill="#641818" class="mesh"/>
+    <polygon points="916,-63 922,-45 920,-34" fill="#701a1a" class="mesh"/>
+    <polygon points="916,-63 920,-34 914,-53" fill="#6e1919" class="mesh"/>
+    <polygon points="922,-45 928,-28 926,-16" fill="#7a1d1d" class="mesh"/>
+    <polygon points="922,-45 926,-16 920,-34" fill="#781c1c" class="mesh"/>
+    <polygon points="928,-28 934,-16 932,-2" fill="#822121" class="mesh"/>
+    <polygon points="928,-28 932,-2 926,-16" fill="#812020" class="mesh"/>
+    <polygon points="934,-16 940,-11 938,4" fill="#832a2a" class="mesh"/>
+    <polygon points="934,-16 938,4 932,-2" fill="#832b2b" class="mesh"/>
     <polygon points="-16,46 -10,46 -12,53" fill="#aac7ae" class="mesh"/>
     <polygon points="-16,46 -12,53 -18,53" fill="#aac7ae" class="mesh"/>
     <polygon points="-10,46 -4,46 -6,53" fill="#aac7ae" class="mesh"/>
@@ -2588,24 +2588,24 @@
     <polygon points="872,-102 876,-95 870,-96" fill="#731b1b" class="mesh"/>
     <polygon points="878,-102 884,-101 882,-94" fill="#711a1a" class="mesh"/>
     <polygon points="878,-102 882,-94 876,-95" fill="#711a1a" class="mesh"/>
-    <polygon points="884,-101 890,-98 888,-92" fill="#6b1919" class="mesh"/>
+    <polygon points="884,-101 890,-99 888,-92" fill="#6c1919" class="mesh"/>
     <polygon points="884,-101 888,-92 882,-94" fill="#6b1919" class="mesh"/>
-    <polygon points="890,-98 896,-93 894,-86" fill="#621717" class="mesh"/>
-    <polygon points="890,-98 894,-86 888,-92" fill="#611717" class="mesh"/>
-    <polygon points="896,-93 902,-83 900,-76" fill="#5c1616" class="mesh"/>
-    <polygon points="896,-93 900,-76 894,-86" fill="#5a1515" class="mesh"/>
-    <polygon points="902,-83 908,-68 906,-61" fill="#611616" class="mesh"/>
-    <polygon points="902,-83 906,-61 900,-76" fill="#5e1616" class="mesh"/>
-    <polygon points="908,-68 914,-49 912,-43" fill="#691818" class="mesh"/>
-    <polygon points="908,-68 912,-43 906,-61" fill="#661818" class="mesh"/>
-    <polygon points="914,-49 920,-29 918,-22" fill="#751b1b" class="mesh"/>
-    <polygon points="914,-49 918,-22 912,-43" fill="#701a1a" class="mesh"/>
-    <polygon points="920,-29 926,-10 924,-3" fill="#801e1e" class="mesh"/>
-    <polygon points="920,-29 924,-3 918,-22" fill="#7c1d1d" class="mesh"/>
-    <polygon points="926,-10 932,5 930,11" fill="#842d2d" class="mesh"/>
-    <polygon points="926,-10 930,11 924,-3" fill="#832828" class="mesh"/>
-    <polygon points="932,5 938,11 936,18" fill="#973e3e" class="mesh"/>
-    <polygon points="932,5 936,18 930,11" fill="#963b3b" class="mesh"/>
+    <polygon points="890,-99 896,-93 894,-86" fill="#621717" class="mesh"/>
+    <polygon points="890,-99 894,-86 888,-92" fill="#611717" class="mesh"/>
+    <polygon points="896,-93 902,-84 900,-77" fill="#5b1515" class="mesh"/>
+    <polygon points="896,-93 900,-77 894,-86" fill="#5a1515" class="mesh"/>
+    <polygon points="902,-84 908,-70 906,-62" fill="#5f1616" class="mesh"/>
+    <polygon points="902,-84 906,-62 900,-77" fill="#5e1616" class="mesh"/>
+    <polygon points="908,-70 914,-53 912,-44" fill="#681818" class="mesh"/>
+    <polygon points="908,-70 912,-44 906,-62" fill="#651818" class="mesh"/>
+    <polygon points="914,-53 920,-34 918,-24" fill="#721b1b" class="mesh"/>
+    <polygon points="914,-53 918,-24 912,-44" fill="#6f1a1a" class="mesh"/>
+    <polygon points="920,-34 926,-16 924,-5" fill="#7d1d1d" class="mesh"/>
+    <polygon points="920,-34 924,-5 918,-24" fill="#7a1d1d" class="mesh"/>
+    <polygon points="926,-16 932,-2 930,8" fill="#832828" class="mesh"/>
+    <polygon points="926,-16 930,8 924,-5" fill="#822525" class="mesh"/>
+    <polygon points="932,-2 938,4 936,15" fill="#853131" class="mesh"/>
+    <polygon points="932,-2 936,15 930,8" fill="#853030" class="mesh"/>
     <polygon points="-18,53 -12,53 -15,59" fill="#aac7ae" class="mesh"/>
     <polygon points="-18,53 -15,59 -21,59" fill="#aac7ae" class="mesh"/>
     <polygon points="-12,53 -6,53 -9,59" fill="#aac7ae" class="mesh"/>
@@ -2906,24 +2906,24 @@
     <polygon points="870,-96 873,-89 867,-89" fill="#731b1b" class="mesh"/>
     <polygon points="876,-95 882,-94 879,-88" fill="#711a1a" class="mesh"/>
     <polygon points="876,-95 879,-88 873,-89" fill="#711a1a" class="mesh"/>
-    <polygon points="882,-94 888,-92 885,-85" fill="#6b1919" class="mesh"/>
+    <polygon points="882,-94 888,-92 885,-85" fill="#6c1919" class="mesh"/>
     <polygon points="882,-94 885,-85 879,-88" fill="#6b1919" class="mesh"/>
     <polygon points="888,-92 894,-86 891,-79" fill="#621717" class="mesh"/>
     <polygon points="888,-92 891,-79 885,-85" fill="#611717" class="mesh"/>
-    <polygon points="894,-86 900,-76 897,-69" fill="#5c1616" class="mesh"/>
-    <polygon points="894,-86 897,-69 891,-79" fill="#5a1515" class="mesh"/>
-    <polygon points="900,-76 906,-61 903,-55" fill="#611616" class="mesh"/>
-    <polygon points="900,-76 903,-55 897,-69" fill="#5e1616" class="mesh"/>
-    <polygon points="906,-61 912,-43 909,-36" fill="#691818" class="mesh"/>
-    <polygon points="906,-61 909,-36 903,-55" fill="#661818" class="mesh"/>
-    <polygon points="912,-43 918,-22 915,-16" fill="#751b1b" class="mesh"/>
-    <polygon points="912,-43 915,-16 909,-36" fill="#701a1a" class="mesh"/>
-    <polygon points="918,-22 924,-3 921,4" fill="#801e1e" class="mesh"/>
-    <polygon points="918,-22 921,4 915,-16" fill="#7c1d1d" class="mesh"/>
-    <polygon points="924,-3 930,11 927,18" fill="#842d2d" class="mesh"/>
-    <polygon points="924,-3 927,18 921,4" fill="#832828" class="mesh"/>
-    <polygon points="930,11 936,18 933,24" fill="#973e3e" class="mesh"/>
-    <polygon points="930,11 933,24 927,18" fill="#963b3b" class="mesh"/>
+    <polygon points="894,-86 900,-77 897,-70" fill="#5c1616" class="mesh"/>
+    <polygon points="894,-86 897,-70 891,-79" fill="#5a1515" class="mesh"/>
+    <polygon points="900,-77 906,-62 903,-55" fill="#601616" class="mesh"/>
+    <polygon points="900,-77 903,-55 897,-70" fill="#5e1616" class="mesh"/>
+    <polygon points="906,-62 912,-44 909,-37" fill="#691818" class="mesh"/>
+    <polygon points="906,-62 909,-37 903,-55" fill="#661818" class="mesh"/>
+    <polygon points="912,-44 918,-24 915,-16" fill="#731b1b" class="mesh"/>
+    <polygon points="912,-44 915,-16 909,-37" fill="#701a1a" class="mesh"/>
+    <polygon points="918,-24 924,-5 921,3" fill="#7e1d1d" class="mesh"/>
+    <polygon points="918,-24 921,3 915,-16" fill="#7b1d1d" class="mesh"/>
+    <polygon points="924,-5 930,8 927,17" fill="#832b2b" class="mesh"/>
+    <polygon points="924,-5 927,17 921,3" fill="#822727" class="mesh"/>
+    <polygon points="930,8 936,15 933,23" fill="#8e3838" class="mesh"/>
+    <polygon points="930,8 933,23 927,17" fill="#8d3636" class="mesh"/>
     <polygon points="-21,59 -15,59 -17,66" fill="#aac7ae" class="mesh"/>
     <polygon points="-21,59 -17,66 -23,66" fill="#aac7ae" class="mesh"/>
     <polygon points="-15,59 -9,59 -11,66" fill="#aac7ae" class="mesh"/>
@@ -3224,24 +3224,24 @@
     <polygon points="867,-89 871,-82 865,-82" fill="#731b1b" class="mesh"/>
     <polygon points="873,-89 879,-88 877,-81" fill="#711a1a" class="mesh"/>
     <polygon points="873,-89 877,-81 871,-82" fill="#711a1a" class="mesh"/>
-    <polygon points="879,-88 885,-85 883,-78" fill="#6b1919" class="mesh"/>
-    <polygon points="879,-88 883,-78 877,-81" fill="#6b1919" class="mesh"/>
+    <polygon points="879,-88 885,-85 883,-79" fill="#6b1919" class="mesh"/>
+    <polygon points="879,-88 883,-79 877,-81" fill="#6b1919" class="mesh"/>
     <polygon points="885,-85 891,-79 889,-73" fill="#621717" class="mesh"/>
-    <polygon points="885,-85 889,-73 883,-78" fill="#611717" class="mesh"/>
-    <polygon points="891,-79 897,-69 895,-63" fill="#5c1616" class="mesh"/>
+    <polygon points="885,-85 889,-73 883,-79" fill="#611717" class="mesh"/>
+    <polygon points="891,-79 897,-70 895,-63" fill="#5c1616" class="mesh"/>
     <polygon points="891,-79 895,-63 889,-73" fill="#5a1515" class="mesh"/>
-    <polygon points="897,-69 903,-55 901,-48" fill="#611616" class="mesh"/>
-    <polygon points="897,-69 901,-48 895,-63" fill="#5e1616" class="mesh"/>
-    <polygon points="903,-55 909,-36 907,-29" fill="#691818" class="mesh"/>
-    <polygon points="903,-55 907,-29 901,-48" fill="#661818" class="mesh"/>
-    <polygon points="909,-36 915,-16 913,-9" fill="#751b1b" class="mesh"/>
-    <polygon points="909,-36 913,-9 907,-29" fill="#701a1a" class="mesh"/>
-    <polygon points="915,-16 921,4 919,10" fill="#801e1e" class="mesh"/>
+    <polygon points="897,-70 903,-55 901,-48" fill="#601616" class="mesh"/>
+    <polygon points="897,-70 901,-48 895,-63" fill="#5e1616" class="mesh"/>
+    <polygon points="903,-55 909,-37 907,-30" fill="#691818" class="mesh"/>
+    <polygon points="903,-55 907,-30 901,-48" fill="#661818" class="mesh"/>
+    <polygon points="909,-37 915,-16 913,-9" fill="#741b1b" class="mesh"/>
+    <polygon points="909,-37 913,-9 907,-30" fill="#701a1a" class="mesh"/>
+    <polygon points="915,-16 921,3 919,10" fill="#801e1e" class="mesh"/>
     <polygon points="915,-16 919,10 913,-9" fill="#7c1d1d" class="mesh"/>
-    <polygon points="921,4 927,18 925,24" fill="#842d2d" class="mesh"/>
-    <polygon points="921,4 925,24 919,10" fill="#832828" class="mesh"/>
-    <polygon points="927,18 933,24 931,31" fill="#973e3e" class="mesh"/>
-    <polygon points="927,18 931,31 925,24" fill="#963b3b" class="mesh"/>
+    <polygon points="921,3 927,17 925,24" fill="#842d2d" class="mesh"/>
+    <polygon points="921,3 925,24 919,10" fill="#832828" class="mesh"/>
+    <polygon points="927,17 933,23 931,31" fill="#933c3c" class="mesh"/>
+    <polygon points="927,17 931,31 925,24" fill="#933a3a" class="mesh"/>
     <polygon points="-23,66 -17,66 -19,73" fill="#aac7ae" class="mesh"/>
     <polygon points="-23,66 -19,73 -25,73" fill="#aac7ae" class="mesh"/>
     <polygon points="-17,66 -11,66 -13,73" fill="#aac7ae" class="mesh"/>
@@ -3542,23 +3542,23 @@
     <polygon points="865,-82 869,-75 863,-76" fill="#731b1b" class="mesh"/>
     <polygon points="871,-82 877,-81 875,-75" fill="#711a1a" class="mesh"/>
     <polygon points="871,-82 875,-75 869,-75" fill="#711a1a" class="mesh"/>
-    <polygon points="877,-81 883,-78 881,-72" fill="#6b1919" class="mesh"/>
+    <polygon points="877,-81 883,-79 881,-72" fill="#6b1919" class="mesh"/>
     <polygon points="877,-81 881,-72 875,-75" fill="#6b1919" class="mesh"/>
-    <polygon points="883,-78 889,-73 887,-66" fill="#621717" class="mesh"/>
-    <polygon points="883,-78 887,-66 881,-72" fill="#611717" class="mesh"/>
+    <polygon points="883,-79 889,-73 887,-66" fill="#621717" class="mesh"/>
+    <polygon points="883,-79 887,-66 881,-72" fill="#611717" class="mesh"/>
     <polygon points="889,-73 895,-63 893,-56" fill="#5c1616" class="mesh"/>
     <polygon points="889,-73 893,-56 887,-66" fill="#5a1515" class="mesh"/>
     <polygon points="895,-63 901,-48 899,-42" fill="#611616" class="mesh"/>
     <polygon points="895,-63 899,-42 893,-56" fill="#5e1616" class="mesh"/>
-    <polygon points="901,-48 907,-29 905,-23" fill="#691818" class="mesh"/>
+    <polygon points="901,-48 907,-30 905,-23" fill="#691818" class="mesh"/>
     <polygon points="901,-48 905,-23 899,-42" fill="#661818" class="mesh"/>
-    <polygon points="907,-29 913,-9 911,-2" fill="#751b1b" class="mesh"/>
-    <polygon points="907,-29 911,-2 905,-23" fill="#701a1a" class="mesh"/>
+    <polygon points="907,-30 913,-9 911,-2" fill="#741b1b" class="mesh"/>
+    <polygon points="907,-30 911,-2 905,-23" fill="#701a1a" class="mesh"/>
     <polygon points="913,-9 919,10 917,17" fill="#801e1e" class="mesh"/>
     <polygon points="913,-9 917,17 911,-2" fill="#7c1d1d" class="mesh"/>
     <polygon points="919,10 925,24 923,31" fill="#842d2d" class="mesh"/>
     <polygon points="919,10 923,31 917,17" fill="#832828" class="mesh"/>
-    <polygon points="925,24 931,31 929,37" fill="#973e3e" class="mesh"/>
+    <polygon points="925,24 931,31 929,37" fill="#963e3e" class="mesh"/>
     <polygon points="925,24 929,37 923,31" fill="#963b3b" class="mesh"/>
     <polygon points="-25,73 -19,73 -21,79" fill="#aac7ae" class="mesh"/>
     <polygon points="-25,73 -21,79 -27,79" fill="#aac7ae" class="mesh"/>
